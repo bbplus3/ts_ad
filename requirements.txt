@@ -9,4 +9,4 @@ seaborn==0.13.2
 shiny==1.3.0
 statsmodels==0.14.4
 tensorflow==2.18.0
-tqdm==4.76.1
+
