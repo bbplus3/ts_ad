@@ -29,7 +29,7 @@ import tqdm
 import itertools
 plt.style.use('fivethirtyeight')
 
-# python -m shiny run C:\Users\cashc\shinyapp\shinyapp.py --port 8080
+# python -m shiny run shinyapp.py --port 8080
 
 # Load Data
 df = pd.read_csv("bills.csv")
