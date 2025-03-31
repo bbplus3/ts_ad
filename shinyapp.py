@@ -33,7 +33,7 @@ plt.style.use('fivethirtyeight')
 
 # Load Data
 df = pd.read_csv("bills.csv")
-df["Date"] = pd.to_datetime(df["Date"])
+df['Date'] = pd.to_datetime(df['Date'], errors = 'coerce')
 df = df.rename(columns={"Date": "ds", "Amount": "y"})
 
 # Subset Data
@@ -219,7 +219,8 @@ with ui.navset_pill(id="tab"):
             @reactive.calc
             def data():
                 df = pd.read_csv("bills.csv")
-                df['Date'] = pd.to_datetime(df['Date'])#, infer_datetime_format=True)
+                #df['Date'] = pd.to_datetime(df['Date'])#, infer_datetime_format=True)
+                df['Date'] = pd.to_datetime(df['Date'], errors = 'coerce')
                 df.replace(r'^\s*$', pd.NA, regex=True, inplace=True)
                 df.replace('<NA>', pd.NA, inplace=True) 
     
