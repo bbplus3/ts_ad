@@ -212,7 +212,7 @@ with ui.navset_pill(id="tab"):
     with ui.nav_panel("Anomaly Detection"):
         
         with ui.card():     
-            ui.card_header("Detect Anomalies on entire Dataset (not editable with date input on sidebar")
+            ui.card_header("Detect Anomalies on entire Dataset (not editable with date input on sidebar)")
             with ui.layout_sidebar():
                 with ui.sidebar(bg="#f8f8f8"):
                     ui.input_radio_buttons("only_anomalies", "Anomaly View", {"a": "All Data with Anomalies", "b": "Only Anomalies"})
