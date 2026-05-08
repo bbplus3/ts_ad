@@ -45,6 +45,7 @@ df = df.rename(columns={"Date": "ds", "Amount": "y"})
 dfpse = df[df["Type"] == "PSE"]
 dfwater = df[df["Type"] == "water"]
 #dfwater = pd.get_dummies(dfwater, columns=['month'], drop_first=True)  # One-hot encode months
+dfwater = dfwater.copy()
 dfwater['cap'] = dfwater['y'].max() * 1.1  # Adding capacity for logistic growth
 dfgarbage = df[df["Type"] == "garbage"]
 
