@@ -1,16 +1,8 @@
 import logging
 import os
-import platform
 
-if platform.system() != "Windows":
-    import cmdstanpy
-    try:
-        cmdstanpy.cmdstan_path()
-    except ValueError:
-        cmdstanpy.install_cmdstan(overwrite=False, verbose=False, progress=False)
-    os.environ["STAN_BACKEND"] = "CMDSTANPY"
-    logging.getLogger("cmdstanpy").setLevel(logging.WARNING)
-    logging.getLogger("prophet").setLevel(logging.WARNING)
+logging.getLogger("pystan").setLevel(logging.WARNING)
+logging.getLogger("prophet").setLevel(logging.WARNING)
 
 import matplotlib.pyplot as plt
 import numpy as np
