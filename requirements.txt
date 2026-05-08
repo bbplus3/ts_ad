@@ -1,10 +1,9 @@
+cmdstanpy==1.2.4
 keras==3.8.0
 matplotlib==3.10.0
 numpy==1.26.4
 pandas==2.2.3
 plotly-express==0.4.1
-cmdstanpy==1.2.4
-pystan==3.9.1
 prophet==1.1.6
 scikit-learn==1.6.1
 seaborn==0.13.2

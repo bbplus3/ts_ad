@@ -1,5 +1,7 @@
-import cmdstanpy
-cmdstanpy.install_cmdstan(overwrite=False, verbose=False)
+import platform
+if platform.system() != "Windows":
+    import cmdstanpy
+    cmdstanpy.install_cmdstan(overwrite=False, verbose=False)
 import matplotlib.pyplot as plt
 import numpy as np 
 import pandas as pd 
