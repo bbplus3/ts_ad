@@ -1,4 +1,5 @@
 import platform
+print(f"Platform: {platform.system()}")
 if platform.system() != "Windows":
     import cmdstanpy
     cmdstanpy.install_cmdstan(overwrite=False, verbose=False)
