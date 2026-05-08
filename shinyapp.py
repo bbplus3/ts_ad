@@ -15,11 +15,11 @@ from datetime import datetime as dt, timedelta, date
 from dateutil import relativedelta
 from matplotlib.backends.backend_agg import RendererAgg
 from pathlib import Path
-from cmdstanpy import install_cmdstan
-try:
-    install_cmdstan()
-except Exception:
-    pass
+#from cmdstanpy import install_cmdstan
+#try:
+#    install_cmdstan()
+#except Exception:
+#    pass
 from prophet import Prophet
 from prophet.diagnostics import cross_validation, performance_metrics
 from prophet.plot import plot_cross_validation_metric
