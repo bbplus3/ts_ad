@@ -35,7 +35,7 @@ dfwater   = df[df["Type"] == "water"].copy()
 dfgarbage = df[df["Type"] == "garbage"].copy()
 
 # Billing frequency labels
-FREQ_MAP = {"PSE": "ME", "water": "2ME", "garbage": "QE"}
+FREQ_MAP = {"PSE": "M", "water": "2M", "garbage": "Q"}
 PERIOD_MONTHS = {"PSE": 1, "water": 2, "garbage": 3}
 
 def prepare_series(raw_df, freq):
