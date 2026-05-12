@@ -30,13 +30,23 @@ df = pd.read_csv("bills.csv")
 df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
 df = df.rename(columns={"Date": "ds", "Amount": "y"})
 
-dfpse     = df[df["Type"] == "PSE"].set_index("ds").asfreq("ME")
-dfwater   = df[df["Type"] == "water"].set_index("ds").asfreq("2ME")
-dfgarbage = df[df["Type"] == "garbage"].set_index("ds").asfreq("QE")
+dfpse     = df[df["Type"] == "PSE"].copy()
+dfwater   = df[df["Type"] == "water"].copy()
+dfgarbage = df[df["Type"] == "garbage"].copy()
 
-# Billing frequency labels and month offsets
+# Billing frequency labels
 FREQ_MAP = {"PSE": "ME", "water": "2ME", "garbage": "QE"}
 PERIOD_MONTHS = {"PSE": 1, "water": 2, "garbage": 3}
+
+def prepare_series(raw_df, freq):
+    """
+    Resample a utility dataframe to the correct frequency.
+    Uses mean resampling so irregular billing dates snap cleanly
+    to period-end boundaries without creating empty rows.
+    """
+    s = raw_df.set_index("ds")["y"].dropna()
+    s = s.resample(freq).mean().dropna()
+    return s.to_frame(name="y")
 
 # ── SARIMAX helpers ────────────────────────────────────────────────────────────
 def fit_sarimax(series, order=(1,1,1), seasonal_order=(1,1,1,12)):
@@ -121,7 +131,7 @@ with ui.navset_pill(id="tab"):
                     start = pd.to_datetime(input.date_start())
                     end   = pd.to_datetime(input.date_end())
 
-                    raw = df[df["Type"] == sel]
+                    raw = df[df["Type"] == sel].copy()
                     raw = raw[(raw["ds"] >= start) & (raw["ds"] <= end)]
 
                     fig, ax = plt.subplots(figsize=(10, 6))
@@ -156,8 +166,8 @@ with ui.navset_pill(id="tab"):
                     freq  = FREQ_MAP[ut]
                     raw   = df[df["Type"] == ut].copy()
                     raw   = raw[(raw["ds"] >= start) & (raw["ds"] <= end)]
-                    raw   = raw.set_index("ds").asfreq(freq)
-                    return raw, freq, ut
+                    series = prepare_series(raw, freq)
+                    return series, freq, ut
 
                 @reactive.calc
                 def build_model():
