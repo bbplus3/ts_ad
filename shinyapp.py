@@ -1,3 +1,5 @@
+import os
+os.environ["PROPHET_BACKEND"] = "PYSTAN"
 import logging
 import os
 
