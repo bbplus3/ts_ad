@@ -1,11 +1,8 @@
-import os
-os.environ["PROPHET_BACKEND"] = "PYSTAN"
 import logging
 import os
-
+os.environ["PROPHET_BACKEND"] = "PYSTAN"
 logging.getLogger("pystan").setLevel(logging.WARNING)
 logging.getLogger("prophet").setLevel(logging.WARNING)
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
